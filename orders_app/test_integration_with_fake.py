@@ -1,6 +1,6 @@
 from order_service import create_order
-from database import SessionLocal
-from models import Order
+from database import SessionLocal, engine
+from models import Order, Base
 from user_repository import FakeUserRepository
 
 # ---- Fake usado en la APP ----
@@ -17,6 +17,7 @@ class NullNotifier:
         pass
 
 def test_create_order_integration_with_fake():
+    Base.metadata.create_all(engine)
     db = SessionLocal()
     order = create_order(3, 60, NullNotifier(), DummyLogger(), db, FakeUserRepository())
     assert order.status == 'CREATED'
