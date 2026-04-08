@@ -21,7 +21,7 @@ jobs:
           python-version: "3.11"
  
       - name: Install dependencies
-        run: pip install pytest
+        run: pip install -r orders_app/requirements.txt
  
       - name: Run integration tests
         run: pytest orders_app/test_integration_with_fake.py -v
